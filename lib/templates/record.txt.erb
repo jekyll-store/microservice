@@ -1,0 +1,20 @@
+---
+Order: <%= number %>
+Email: <%= address['email'] %>
+Delivery: <%= delivery.name %>
+Total: £<%= total.to_f %>
+
+Basket:
+<% basket.each do |product, quantity| %>
+  <%= product.name %> (x<%= quantity %>)
+<% end %>
+
+Address:
+  <%= address['name'] %>,
+  <%= address['address1'] %>,<% unless address['address2'] == '' %>
+  <%= address['address2'] %>,<% end %>
+  <%= address['city'] %>,
+  <%= address['county'] %>,
+  <%= address['country'].name %>,
+  <%= address['postcode'] %>
+---

@@ -1,0 +1,10 @@
+--- Error
+<%= self[:error].class %>: <%= self[:error].message %>
+
+--- Backtrace
+<% if self[:error].backtrace %>
+<%= self[:error].backtrace.join("\n") %>
+<% end %>
+
+--- Env
+<%= self[:request].env.map { |k, v| "#{k}: #{v}" }.join("\n") %>
