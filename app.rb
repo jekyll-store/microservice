@@ -19,6 +19,8 @@ end
 post '/purchase' do
   json = JSON.parse(request.body.read)
   order = OrderProcessor.process(json)
+  Mailer.record(order)
+  Mailer.confirm(order)
   { number: order.number }.to_json
 end
 
