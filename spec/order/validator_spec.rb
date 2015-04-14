@@ -18,12 +18,12 @@ module Order
 
     it 'fails if delivery method not available for country' do
       order.delivery = METHODS['Tracked']
-      expect{ Validator.validate(order) }.to raise_error(Undeliverable)
+      expect { Validator.validate(order) }.to raise_error(Undeliverable)
     end
 
     it 'fails if total does not match up' do
       order.total = BigDecimal('5.00')
-      expect{ Validator.validate(order) }.to raise_error(TotalMismatch)
+      expect { Validator.validate(order) }.to raise_error(TotalMismatch)
     end
   end
 end

@@ -1,7 +1,7 @@
 require 'processor'
 
 describe Processor do
-  let(:order) { double() }
+  let(:order) { double }
 
   it 'processes' do
     expect(Order::Builder).to receive(:build).and_return(order)

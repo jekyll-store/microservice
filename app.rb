@@ -37,5 +37,5 @@ end
 
 error do
   Mailer.error(env['sinatra.error'], request)
-  [500, { message: env['sinatra.error'].message }.to_json]
+  { message: env['sinatra.error'].message }.to_json
 end
