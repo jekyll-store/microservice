@@ -5,15 +5,15 @@ require_relative 'entities'
 module Resources
   class << self
     def products
-      @products ||= parse('products', Product, 'name')
+      @products ||= parse('products', ProductEntity, 'name')
     end
 
     def countries
-      @countries ||= parse('countries', Country, 'iso')
+      @countries ||= parse('countries', CountryEntity, 'iso')
     end
 
     def delivery_methods
-      @delivery_methods ||= parse('delivery-methods', DeliveryMethod, 'name')
+      @delivery_methods ||= parse('delivery-methods', DeliveryMethodEntity, 'name')
     end
 
     def reset

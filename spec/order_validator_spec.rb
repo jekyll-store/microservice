@@ -3,7 +3,7 @@ require_relative 'fixtures'
 
 describe OrderValidator do
   let(:order) do
-    order = Order.new(total: '37.9')
+    order = OrderEntity.new(total: '37.9')
     order.basket = { PRODUCTS['bag'] => 3, PRODUCTS['shoe'] => 2 }
     order.address = { 'country' => COUNTRIES['LK'] }
     order.delivery = METHODS['Express']

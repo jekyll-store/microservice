@@ -4,7 +4,7 @@ require_relative 'order_validator'
 module OrderBuilder
   class << self
     def build(json)
-      order = Order.new(json)
+      order = OrderEntity.new(json)
       build_products(order)
       build_country(order)
       build_delivery(order)

@@ -2,7 +2,7 @@ require 'virtus'
 require 'bigdecimal'
 require 'securerandom'
 
-class Order
+class OrderEntity
   include Virtus.model
   attribute :number, String, default: SecureRandom.hex(8).upcase
   attribute :basket, Hash[String => Integer]
@@ -13,21 +13,21 @@ class Order
   attribute :total, BigDecimal
 end
 
-class Product
+class ProductEntity
   include Virtus.model
   attribute :name, String
   attribute :price, BigDecimal
   attribute :weight, BigDecimal
 end
 
-class Country
+class CountryEntity
   include Virtus.model
   attribute :iso, String
   attribute :name, String
   attribute :zones, Array[String]
 end
 
-class DeliveryMethod
+class DeliveryMethodEntity
   include Virtus.model
   attribute :name, String
   attribute :zones, Array[String]

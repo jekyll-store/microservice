@@ -3,7 +3,7 @@ require_relative 'fixtures'
 
 describe OrderTotaller do
   let(:order) do
-    order = Order.new
+    order = OrderEntity.new
     order.basket = { PRODUCTS['bag'] => 3, PRODUCTS['shoe'] => 2 }
     order.delivery = METHODS['Standard']
     order
