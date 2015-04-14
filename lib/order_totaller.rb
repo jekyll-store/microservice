@@ -46,8 +46,8 @@ module OrderTotaller
         previous = amount
       end
 
-      previous ? BigDecimal(previous.to_s) :
-        fail(DeliveryNotApplicable, @order.delivery.name)
+      fail(DeliveryNotApplicable, @order.delivery.name) unless previous
+      BigDecimal(previous.to_s)
     end
   end
 end

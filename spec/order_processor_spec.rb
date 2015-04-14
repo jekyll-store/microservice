@@ -1,6 +1,5 @@
 require 'order_processor'
 require_relative 'fixtures'
-include Consequence
 
 describe OrderProcessor do
   let(:params) do
@@ -34,11 +33,6 @@ describe OrderProcessor do
     expect(PaymentMethods::Paymill).to receive(:process)
     expect(Mailer).to receive(:record)
     expect(Mailer).to receive(:confirm)
-    expect(OrderProcessor.process(params)).to be_a(Success)
-  end
-
-  it 'handles errors' do
-    params['basket'].merge!('tractor' => 10)
-    expect(OrderProcessor.process(params)).to be_a(Failure)
+    OrderProcessor.process(params)
   end
 end

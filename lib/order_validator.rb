@@ -1,25 +1,22 @@
-require 'consequence'
-require 'consequence/core_ext/utils'
 require_relative 'order_totaller'
 
 module OrderValidator
   class << self
-    include Consequence
-
     def validate(order)
-      Success[order] >> m(:delivery_available) >> m(:total_matches)
+      delivery_available(order)
+      total_matches(order)
     end
 
     private
 
     def delivery_available(order)
-      !(order.address['country'].zones & order.delivery.zones).empty? ? order :
-        Failure[Undeliverable.new(order.delivery.name)]
+      return unless (order.address['country'].zones & order.delivery.zones).empty?
+      fail Undeliverable, order.delivery.name
     end
 
     def total_matches(order)
-      OrderTotaller.total(order) == order.total ? order :
-        Failure[TotalMismatch.new(order.total.to_f)]
+      return unless OrderTotaller.total(order) != order.total
+      fail TotalMismatch, order.total.to_f
     end
   end
 end

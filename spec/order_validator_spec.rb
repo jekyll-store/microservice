@@ -1,6 +1,5 @@
 require 'order_validator'
 require_relative 'fixtures'
-include Consequence
 
 describe OrderValidator do
   let(:order) do
@@ -12,18 +11,16 @@ describe OrderValidator do
   end
 
   it 'succeeds for valid order' do
-    expect(OrderValidator.validate(order)).to be_a(Success)
+    expect { OrderValidator.validate(order) }.to_not raise_error
   end
 
   it 'fails if delivery method not available for country' do
     order.delivery = METHODS['Tracked']
-    expect(OrderValidator.validate(order))
-      .to eq(Failure[Undeliverable.new('Tracked')])
+    expect{ OrderValidator.validate(order) }.to raise_error(Undeliverable)
   end
 
   it 'fails if total does not match up' do
     order.total = BigDecimal('5.00')
-    expect(OrderValidator.validate(order))
-      .to eq(Failure[TotalMismatch.new(5.00)])
+    expect{ OrderValidator.validate(order) }.to raise_error(TotalMismatch)
   end
 end

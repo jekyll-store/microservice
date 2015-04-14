@@ -17,17 +17,9 @@ options '*' do
 end
 
 post '/purchase' do
-  content_type :json
-
   json = JSON.parse(request.body.read)
-  result = OrderProcessor.process(json)
-
-  if result.success?
-    [200, { number: result.value.number }.to_json]
-  else
-    Mailer.error(result.value, request)
-    [500, { message: result.value.message }.to_json]
-  end
+  order = OrderProcessor.process(json)
+  { number: order.number }.to_json
 end
 
 post '/reset' do
@@ -38,4 +30,9 @@ end
 post '/test-mail' do
   Mailer.test
   halt 200
+end
+
+error do
+  Mailer.error(env['sinatra.error'], request)
+  [500, { message: env['sinatra.error'].message }.to_json]
 end

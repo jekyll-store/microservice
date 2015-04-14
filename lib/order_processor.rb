@@ -1,5 +1,3 @@
-require 'consequence'
-require 'consequence/core_ext/utils'
 require_relative 'entities'
 require_relative 'order_builder'
 require_relative 'order_validator'
@@ -8,15 +6,13 @@ require_relative 'mailer'
 
 module OrderProcessor
   class << self
-    include Consequence
-
     def process(json)
-      Success[Order.new(json)] >>
-        OrderBuilder.m(:build) >>
-        OrderValidator.m(:validate) >>
-        m(:process_transaction) <<
-        Mailer.m(:record) <<
-        Mailer.m(:confirm)
+      order = Order.new(json)
+      OrderBuilder.build(order)
+      OrderValidator.validate(order)
+      process_transaction(order)
+      Mailer.record(order)
+      Mailer.confirm(order)
     end
 
     private
@@ -27,7 +23,7 @@ module OrderProcessor
         PaymentMethods::Paymill.process(order)
         order
       else
-        Failure[PaymentMethodNotSet.new]
+        fail PaymentMethodNotSet
       end
     end
   end

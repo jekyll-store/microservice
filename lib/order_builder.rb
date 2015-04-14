@@ -1,38 +1,33 @@
-require 'consequence'
-require 'consequence/core_ext/utils'
 require_relative 'resources'
 
 module OrderBuilder
   class << self
-    include Consequence
-
     def build(order)
-      Success[order] >> m(:products) >> m(:country) >> m(:delivery)
+      build_products(order)
+      build_country(order)
+      build_delivery(order)
     end
 
     private
 
-    def products(order)
+    def build_products(order)
       order.basket = order.basket.map do |name, quantity|
         product = Resources.products[name]
-        return Failure[ProductNotFound.new(name)] unless product
+        fail(ProductNotFound, name) unless product
         [product, quantity]
       end
-      order
     end
 
-    def country(order)
+    def build_country(order)
       iso = order.address['country']
       order.address['country'] = Resources.countries[iso]
-      order.address['country'] ? order :
-        Failure[CountryNotFound.new(iso)]
+      fail(CountryNotFound, iso) unless order.address['country']
     end
 
-    def delivery(order)
+    def build_delivery(order)
       method_name = order.delivery
       order.delivery = Resources.delivery_methods[method_name]
-      order.delivery ? order :
-        Failure[DeliveryMethodNotFound.new(method_name)]
+      fail(DeliveryMethodNotFound, method_name) unless order.delivery
     end
   end
 end
