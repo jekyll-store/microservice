@@ -27,6 +27,7 @@ describe OrderProcessor do
     allow(Resources).to receive(:products).and_return(PRODUCTS)
     allow(Resources).to receive(:countries).and_return(COUNTRIES)
     allow(Resources).to receive(:delivery_methods).and_return(METHODS)
+    ENV['JSM_PAYMENT_METHOD'] = 'Paymill'
   end
 
   it 'process succesfully' do
