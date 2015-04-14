@@ -16,7 +16,7 @@ module Templates
     private
 
     def template_file(name)
-      File.join(__FILE__, '..', 'templates', "#{name}.erb")
+      File.expand_path("../templates/#{name}.erb", __FILE__)
     end
 
     def template(name)
