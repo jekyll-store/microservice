@@ -30,7 +30,6 @@ module Order
     end
 
     it 'build for valid order' do
-      expect(Validator).to receive(:validate)
       order = Builder.build(json)
       expect(order.basket).to eql(PRODUCTS['bag'] => 3, PRODUCTS['shoe'] => 2)
       expect(order.address['country']).to eql(COUNTRIES['LK'])

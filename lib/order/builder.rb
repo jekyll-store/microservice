@@ -1,6 +1,5 @@
 require_relative '../resources'
 require_relative '../entities'
-require_relative 'validator'
 
 module Order
   module Builder
@@ -10,7 +9,6 @@ module Order
         build_products(order)
         build_country(order)
         build_delivery(order)
-        Validator.validate(order)
         order
       end
 

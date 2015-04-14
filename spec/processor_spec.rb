@@ -2,35 +2,14 @@ require 'processor'
 require_relative 'fixtures'
 
 describe Processor do
-  let(:json) do
-    {
-      'basket' => { 'bag' => 3, 'shoe' => 2 },
-      'address' => {
-        'name' => 'George Hendrix',
-        'email' => 'ggtop45@example.com',
-        'address1' => '45 Station Road',
-        'address2' => '',
-        'city' => 'Shrovesbury',
-        'county' => 'Wessex',
-        'country' => 'LK',
-        'postcode' => 'WE34 9DU'
-      },
-      'delivery' => 'Express',
-      'token' => 'FIFJ3453GFH56',
-      'currency' => 'GBP',
-      'total' => '37.9'
-    }
-  end
+  let(:order) { double() }
 
-  before do
-    allow(Resources).to receive(:products).and_return(PRODUCTS)
-    allow(Resources).to receive(:countries).and_return(COUNTRIES)
-    allow(Resources).to receive(:delivery_methods).and_return(METHODS)
-    ENV['JSM_PAYMENT_METHOD'] = 'Paymill'
-  end
-
-  it 'process succesfully' do
-    expect(Payment).to receive(:create)
-    Processor.process(json)
+  it 'processes' do
+    expect(Order::Builder).to receive(:build).and_return(order)
+    expect(Order::Validator).to receive(:validate).with(order)
+    expect(Payment).to receive(:create).with(order)
+    expect(Mailer).to receive(:record).with(order)
+    expect(Mailer).to receive(:confirm).with(order)
+    Processor.process({})
   end
 end
