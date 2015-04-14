@@ -31,8 +31,6 @@ describe OrderProcessor do
 
   it 'process succesfully' do
     expect(PaymentMethods::Paymill).to receive(:process)
-    expect(Mailer).to receive(:record)
-    expect(Mailer).to receive(:confirm)
     OrderProcessor.process(params)
   end
 end

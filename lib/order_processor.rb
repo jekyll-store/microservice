@@ -1,14 +1,11 @@
 require_relative 'entities'
 require_relative 'order_builder'
-require_relative 'order_validator'
 require_relative 'payment_methods/paymill'
 
 module OrderProcessor
   class << self
     def process(json)
-      order = Order.new(json)
-      OrderBuilder.build(order)
-      OrderValidator.validate(order)
+      order = OrderBuilder.build(json)
       process_transaction(order)
       order
     end

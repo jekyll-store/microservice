@@ -1,11 +1,15 @@
 require_relative 'resources'
+require_relative 'order_validator'
 
 module OrderBuilder
   class << self
-    def build(order)
+    def build(json)
+      order = Order.new(json)
       build_products(order)
       build_country(order)
       build_delivery(order)
+      OrderValidator.validate(order)
+      order
     end
 
     private
