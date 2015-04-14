@@ -17,22 +17,22 @@ Pony.options = { via: :smtp, via_options: pony_opts.select { |_k, v| !v.nil? } }
 module Mailer
   class << self
     def record(order)
-      Pony.mail(to: 'purchases@jekyll-store.com',
-                from: 'purchases@jekyll-store.com',
+      Pony.mail(to: ENV['JSM_PURCHASES_EMAIL'],
+                from: ENV['JSM_PURCHASES_EMAIL'],
                 subject: 'Purchase',
                 body: Templates.render(:record, order))
     end
 
     def confirm(order)
       Pony.mail(to: order.address['email'],
-                from: 'purchases@jekyll-store.com',
+                from: ENV['JSM_PURCHASES_EMAIL'],
                 subject: 'Jekyll-Store Order Confirmation',
                 html_body: Templates.html_render(:confirm, order))
     end
 
     def error(error, request)
-      Pony.mail(to: 'errors@jekyll-store.com',
-                from: 'errors@jekyll-store.com',
+      Pony.mail(to: ENV['JSM_ERRORS_EMAIL'],
+                from: ENV['JSM_ERRORS_EMAIL'],
                 subject: 'Error',
                 body: Templates.render(:error, error: error, request: request))
     end
