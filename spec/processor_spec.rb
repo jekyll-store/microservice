@@ -1,8 +1,8 @@
-require 'order_processor'
+require 'processor'
 require_relative 'fixtures'
 
-describe OrderProcessor do
-  let(:params) do
+describe Processor do
+  let(:json) do
     {
       'basket' => { 'bag' => 3, 'shoe' => 2 },
       'address' => {
@@ -31,6 +31,6 @@ describe OrderProcessor do
 
   it 'process succesfully' do
     expect(PaymentMethods::Paymill).to receive(:process)
-    OrderProcessor.process(params)
+    Processor.process(json)
   end
 end

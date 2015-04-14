@@ -1,11 +1,11 @@
 require_relative 'entities'
-require_relative 'order_builder'
+require_relative 'order/builder'
 require_relative 'payment_methods/paymill'
 
-module OrderProcessor
+module Processor
   class << self
     def process(json)
-      order = OrderBuilder.build(json)
+      order = Order::Builder.build(json)
       process_transaction(order)
       order
     end

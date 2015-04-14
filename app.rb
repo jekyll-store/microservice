@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/cross_origin'
 require 'json'
-require_relative 'lib/order_processor'
+require_relative 'lib/processor'
 require_relative 'lib/resources'
 require_relative 'lib/mailer'
 
@@ -18,7 +18,7 @@ end
 
 post '/purchase' do
   json = JSON.parse(request.body.read)
-  order = OrderProcessor.process(json)
+  order = Processor.process(json)
   Mailer.record(order)
   Mailer.confirm(order)
   { number: order.number }.to_json
