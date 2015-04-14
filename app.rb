@@ -34,3 +34,8 @@ post '/reset' do
   Resources.reset
   halt 200
 end
+
+post '/test-mail' do
+  Mailer.test
+  halt 200
+end

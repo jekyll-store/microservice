@@ -36,5 +36,12 @@ module Mailer
                 subject: 'Error',
                 body: Templates.render(:error, error: error, request: request))
     end
+
+    def test
+      Pony.mail(to: ENV['JSM_ERRORS_EMAIL'],
+                from: ENV['JSM_ERRORS_EMAIL'],
+                subject: 'Test Mail',
+                body: 'This is a test message.')
+    end
   end
 end
