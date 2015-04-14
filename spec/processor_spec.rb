@@ -30,7 +30,7 @@ describe Processor do
   end
 
   it 'process succesfully' do
-    expect(PaymentMethods::Paymill).to receive(:process)
+    expect(Payment).to receive(:create)
     Processor.process(json)
   end
 end
