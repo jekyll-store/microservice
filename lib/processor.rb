@@ -11,6 +11,7 @@ module Processor
       Payment.create(order)
       Mailer.record(order)
       Mailer.confirm(order)
+      order
     end
   end
 end
