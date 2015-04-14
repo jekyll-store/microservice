@@ -4,6 +4,9 @@ require 'json'
 require_relative 'lib/processor'
 require_relative 'lib/resources'
 require_relative 'lib/mailer'
+require_relative 'lib/environment'
+
+Environment.set
 
 configure do
   enable :cross_origin

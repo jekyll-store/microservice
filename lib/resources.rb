@@ -4,6 +4,8 @@ require_relative 'entities'
 
 module Resources
   class << self
+    attr_accessor :front_url
+
     def products
       @products ||= parse('products', ProductEntity, 'name')
     end
@@ -25,7 +27,7 @@ module Resources
     private
 
     def parse(url, klass, key)
-      full_url = "#{ENV['JSM_FRONT_URL']}/#{url}.json"
+      full_url = "#{front_url}/#{url}.json"
 
       JSON.parse(open(full_url).read).reduce({}) do |hash, element|
         hash.merge!(element[key] => klass.new(element).freeze)

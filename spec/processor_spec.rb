@@ -1,5 +1,4 @@
 require 'processor'
-require_relative 'fixtures'
 
 describe Processor do
   let(:order) { double() }

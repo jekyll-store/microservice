@@ -5,12 +5,15 @@ module Payment
     attr_accessor :method
 
     def create(order)
-      case method
-      when 'Paymill'
-        paymill(order)
-      else
-        fail(PaymentMethodNotFound, method)
-      end
+      send(method, order)
+    end
+
+    def methods
+      ['paymill']
+    end
+
+    def method_exists?
+      methods.include?(method)
     end
 
     private
@@ -26,8 +29,3 @@ module Payment
     end
   end
 end
-
-Paymill.api_key = ENV['JSM_PAYMILL_PRIVATE_KEY']
-Payment.method = ENV['JSM_PAYMENT_METHOD']
-
-class PaymentMethodNotFound < StandardError; end
