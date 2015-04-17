@@ -10,6 +10,8 @@ Jekyll-Store is a lightweight, backend-free ecommerce solution that is easy to d
 
 # Microservice
 
+[![Build Status](https://travis-ci.org/jekyll-store/microservice.svg?branch=master)](https://travis-ci.org/jekyll-store/microservice)
+
 Jekyll-Store Microservice is a [Sinatra](https://github.com/sinatra/sinatra) based application. It exposing two POST and two GET routes:
 
 * `/purchase` - (POST) Request to process a purchase.
