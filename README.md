@@ -53,7 +53,7 @@ As there is no database, the emails are the only record of the purchases. It is 
 
 To config, use the following environment variables:
 
-* `JSM_FRONT_URL` - The URL of you Jekyll-Store Front instance
+* `JSM_FRONT_URL` - The URL of your Jekyll-Store Front instance, (or similar).
 * `JSM_PURCHASES_EMAIL` - The email address to send purchase details.
 * `JSM_ERRORS_EMAIL` - The email address to send errors details.
 * `JSM_PAYMENT_METHOD` - The name of the payment gateway interface.
