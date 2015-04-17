@@ -10,22 +10,23 @@ Jekyll-Store is a lightweight, backend-free ecommerce solution that is easy to d
 
 # Microservice
 
-Jekyll-Store Microservice is a [Sinatra](https://github.com/sinatra/sinatra) based application. It exposing three POST routes:
+Jekyll-Store Microservice is a [Sinatra](https://github.com/sinatra/sinatra) based application. It exposing two POST and two GET routes:
 
-* `/purchase` - Request to process a purchase.
-* `/reset` - Request to update resources.
-* `/test-mail` - Request to send test email to errors address.
+* `/purchase` - (POST) Request to process a purchase.
+* `/reset` - (POST) Request to update resources.
+* `/test-mail` - (GET) Request to send test email to errors address.
+* `/ping` - (GET) Notice to check response and to wake up from idle.
 
 The `/purchase` route expects a JSON object of the following form:
 
 ```json
 {
   "basket": { "bag": 3, "shoe": 2 },
-  "customer" => {
-    "name" => "George Hendrix",
-    "email" => "ggtop45@example.com"
+  "customer": {
+    "name": "George Hendrix",
+    "email": "ggtop45@example.com"
   },
-  "address" => {
+  "address": {
     "address1": "45 Station Road",
     "address2": "",
     "city": "Shrovesbury",
@@ -44,7 +45,7 @@ It then will check that the basket and delivery method adds up to the total. If 
 
 If at any point this fails, an error message will be sent back to the original request and the details of the error will be sent to errors email address.
 
-As there is no database, the emails are the only record of the purchases. It is recomended that they are stored safely and forwarded to the day-to-day address.
+As there is no database, the emails are the only record of the purchases. It is recomended that they are archived safely.
 
 ## Environment Variables
 

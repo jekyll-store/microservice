@@ -30,8 +30,12 @@ post '/reset' do
   halt 200
 end
 
-post '/test-mail' do
+get '/test-mail' do
   Mailer.test
+  halt 200
+end
+
+get '/ping' do
   halt 200
 end
 
