@@ -6,6 +6,7 @@ class OrderEntity
   include Virtus.model
   attribute :number, String, default: SecureRandom.hex(8).upcase
   attribute :basket, Hash[String => Integer]
+  attribute :customer, Hash
   attribute :address, Hash
   attribute :delivery, String
   attribute :token, String

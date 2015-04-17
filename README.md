@@ -21,9 +21,11 @@ The `/purchase` route expects a JSON object of the following form:
 ```json
 {
   "basket": { "bag": 3, "shoe": 2 },
-  "address": {
-    "name": "George Hendrix",
-    "email": "ggtop45@example.com",
+  "customer" => {
+    "name" => "George Hendrix",
+    "email" => "ggtop45@example.com"
+  },
+  "address" => {
     "address1": "45 Station Road",
     "address2": "",
     "city": "Shrovesbury",

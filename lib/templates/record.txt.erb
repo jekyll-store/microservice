@@ -1,6 +1,5 @@
 ---
 Order: <%= number %>
-Email: <%= address['email'] %>
 Delivery: <%= delivery.name %>
 Total: £<%= total.to_f %>
 
@@ -9,8 +8,11 @@ Basket:
   <%= product.name %> (x<%= quantity %>)
 <% end %>
 
+Customer:
+Name: <%= customer['name'] %>,
+Email: <%= customer['email'] %>
+
 Address:
-  <%= address['name'] %>,
   <%= address['address1'] %>,<% unless address['address2'] == '' %>
   <%= address['address2'] %>,<% end %>
   <%= address['city'] %>,

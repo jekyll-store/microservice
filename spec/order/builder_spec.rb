@@ -6,9 +6,11 @@ module Order
     let(:json) do
       {
         'basket' => { 'bag' => 3, 'shoe' => 2 },
-        'address' => {
+        'customer' => {
           'name' => 'George Hendrix',
-          'email' => 'ggtop45@example.com',
+          'email' => 'ggtop45@example.com'
+        },
+        'address' => {
           'address1' => '45 Station Road',
           'address2' => '',
           'city' => 'Shrovesbury',
