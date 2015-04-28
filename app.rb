@@ -20,6 +20,7 @@ options '*' do
 end
 
 post '/purchase' do
+  content_type :json
   json = JSON.parse(request.body.read)
   order = Processor.process(json)
   { number: order.number }.to_json
@@ -40,6 +41,7 @@ get '/ping' do
 end
 
 error do
+  content_type :json
   Mailer.error(env['sinatra.error'], request)
   { message: env['sinatra.error'].message }.to_json
 end
