@@ -1,4 +1,4 @@
-# Jekll-Store/Microservice
+# Jekyll-Store/Microservice
 
 [![Build Status](https://travis-ci.org/jekyll-store/microservice.svg?branch=master)](https://travis-ci.org/jekyll-store/microservice)
 
